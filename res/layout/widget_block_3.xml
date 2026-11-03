@@ -1,0 +1,9 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/course_container" android:layout_width="match_parent" android:layout_height="wrap_content"><LinearLayout android:id="@+id/course_content" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="3dp" android:orientation="vertical" android:background="@drawable/course_3"><TextView android:id="@+id/card_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:includeFontPadding="false" android:textSize="10sp" android:textStyle="bold" android:textColor="#354670"/><TextView android:id="@+id/card_time" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingLeft="0dp" android:paddingRight="0dp" android:layout_marginTop="0dp" android:layout_marginBottom="0dp" android:gravity="start" android:maxLines="1" android:scrollHorizontally="false" android:fontFamily="sans-serif-condensed" android:textStyle="bold" android:includeFontPadding="false" android:autoSizeTextType="none" android:textColor="#354670"/><ImageView android:layout_width="10dp" android:layout_height="5dp" android:src="@drawable/time_separator" android:scaleType="fitCenter" android:contentDescription="至"/><TextView android:id="@+id/card_end" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingLeft="0dp" android:paddingRight="0dp" android:layout_marginTop="0dp" android:layout_marginBottom="0dp" android:gravity="start" android:maxLines="1" android:scrollHorizontally="false" android:fontFamily="sans-serif-condensed" android:textStyle="bold" android:includeFontPadding="false" android:autoSizeTextType="none" android:textColor="#354670"/><TextView android:id="@+id/card_meta" android:layout_width="match_parent" android:layout_height="wrap_content" android:includeFontPadding="false" android:textSize="9.5sp" android:textColor="#60708A"/></LinearLayout></FrameLayout>
+
+
+
+
+
+
+
+
