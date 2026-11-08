@@ -1,0 +1,5 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/band_time" android:layout_width="44dp" android:layout_height="wrap_content" android:includeFontPadding="false" android:gravity="center" android:textSize="10sp" android:maxLines="1" android:scrollHorizontally="false" android:fontFamily="monospace" android:autoSizeTextType="none" android:textColor="#596B89" android:padding="0dp" android:background="@android:color/transparent"/>
+
+
+
+

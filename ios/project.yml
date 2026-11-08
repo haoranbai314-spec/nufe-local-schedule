@@ -1,0 +1,74 @@
+name: NufeSchedule
+options:
+  minimumXcodeGenVersion: 2.42.0
+  deploymentTarget:
+    iOS: '17.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    MARKETING_VERSION: '0.1.0'
+    CURRENT_PROJECT_VERSION: 1
+    APP_GROUP_ID: group.cn.local.nufeschedule.ios
+    TARGETED_DEVICE_FAMILY: '1,2'
+    CODE_SIGN_STYLE: Automatic
+targets:
+  NufeSchedule:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Shared
+      - path: Resources
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: cn.local.nufeschedule.ios
+    info:
+      path: Config/App-Info.plist
+      properties:
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDisplayName: 南财课表
+        ScheduleAppGroup: $(APP_GROUP_ID)
+        UILaunchScreen: {}
+        CFBundleURLTypes:
+          - CFBundleURLName: schedule
+            CFBundleURLSchemes: [nufeschedule]
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+    entitlements:
+      path: Config/App.entitlements
+      properties:
+        com.apple.security.application-groups: [$(APP_GROUP_ID)]
+    dependencies:
+      - target: NufeWidgets
+        embed: true
+  NufeWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Widget
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: cn.local.nufeschedule.ios.widgets
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+    info:
+      path: Config/Widget-Info.plist
+      properties:
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDisplayName: 南财课表组件
+        ScheduleAppGroup: $(APP_GROUP_ID)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: Config/Widget.entitlements
+      properties:
+        com.apple.security.application-groups: [$(APP_GROUP_ID)]
+schemes:
+  NufeSchedule:
+    build:
+      targets:
+        NufeSchedule: all
+        NufeWidgets: all

@@ -1,0 +1,7 @@
+build*/
+*.xcodeproj/
+Config/
+*.p12
+*.mobileprovision
+*.ipa
+.DS_Store

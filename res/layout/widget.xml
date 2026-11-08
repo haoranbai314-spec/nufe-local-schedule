@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="0dp" android:background="@drawable/widget_background">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/widget_header_background" android:paddingTop="8dp" android:paddingBottom="6dp" android:paddingLeft="8dp" android:paddingRight="10dp" android:layout_marginBottom="4dp">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="36dp" android:orientation="horizontal" android:gravity="center_vertical">
+  <ImageView android:id="@+id/widget_prev" android:layout_width="40dp" android:layout_height="match_parent" android:padding="12dp" android:scaleType="fitCenter" android:src="@drawable/widget_arrow_left" android:contentDescription="上一周" android:background="@drawable/header_press"/>
+  <TextView android:id="@+id/widget_title" android:layout_marginLeft="6dp" android:layout_marginRight="6dp" android:includeFontPadding="false" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:gravity="center" android:text="南财课表 · 本周" android:textSize="13sp" android:textStyle="bold" android:textColor="#343431" android:contentDescription="点击回到本周" android:background="@drawable/header_press"/>
+  <ImageView android:id="@+id/widget_next" android:layout_width="40dp" android:layout_height="match_parent" android:padding="12dp" android:scaleType="fitCenter" android:src="@drawable/widget_arrow_right" android:contentDescription="下一周" android:background="@drawable/header_press"/>
+ </LinearLayout>
+ <TextView android:id="@+id/widget_dates" android:layout_width="match_parent" android:layout_height="24dp" android:gravity="center" android:includeFontPadding="false" android:textColor="#787772" android:textSize="10sp" android:paddingTop="0dp" android:paddingBottom="0dp"/>
+ <LinearLayout android:layout_width="match_parent" android:layout_height="38dp" android:gravity="center_vertical" android:orientation="horizontal">
+  <TextView android:layout_width="44dp" android:layout_height="match_parent" android:gravity="center" android:text="时间" android:textSize="9sp" android:textColor="#787772"/>
+  <LinearLayout android:id="@+id/widget_headers" android:gravity="center_vertical" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="horizontal"/>
+ </LinearLayout>
+ </LinearLayout>
+<FrameLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:layout_marginLeft="8dp" android:layout_marginRight="10dp" android:clipChildren="true" android:clipToPadding="true">
+ <ListView android:id="@+id/widget_list" android:fadingEdgeLength="0dp" android:clipChildren="false" android:layout_width="match_parent" android:layout_height="match_parent" android:divider="@android:color/transparent" android:dividerHeight="0dp" android:listSelector="@android:color/transparent" android:cacheColorHint="@android:color/transparent" android:scrollbars="vertical" android:scrollbarStyle="insideOverlay"/>
+</FrameLayout>
+ <FrameLayout android:id="@+id/widget_footer_hit" android:layout_marginLeft="8dp" android:layout_marginRight="10dp" android:layout_marginBottom="4dp" android:layout_width="match_parent" android:layout_height="48dp" android:clipChildren="true">
+ <TextView android:id="@+id/widget_footer" android:layout_gravity="center_vertical" android:layout_width="match_parent" android:layout_height="30dp" android:gravity="center" android:paddingLeft="12dp" android:paddingRight="12dp" android:includeFontPadding="false" android:text="离线课表 · 点击打开" android:textColor="#7C879D" android:textSize="10sp" android:background="@drawable/soft_press"/>
+ </FrameLayout>
+</LinearLayout>
+
+
+
+
+
+
+
+

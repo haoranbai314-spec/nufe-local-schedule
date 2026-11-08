@@ -1,0 +1,54 @@
+name: iOS device IPA for personal sideloading
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  device:
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate app-only project
+        run: |
+          brew install xcodegen
+          cd ios
+          xcodegen generate --spec project-free.yml
+      - name: Build iPhone app without signing
+        run: |
+          cd ios
+          xcodebuild -project NufeScheduleFree.xcodeproj -scheme NufeScheduleFree -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build-free CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build
+      - name: Validate device build and package unsigned IPA
+        run: |
+          APP=ios/build-free/Build/Products/Release-iphoneos/NufeScheduleFree.app
+          export APP
+          file "$APP/NufeScheduleFree"
+          xcrun lipo -archs "$APP/NufeScheduleFree" | grep -w arm64
+          xcrun vtool -show-build "$APP/NufeScheduleFree" | tee device-platform.txt
+          grep -Eq 'platform +IOS$' device-platform.txt
+          python3 - <<'PY'
+          import os, plistlib, pathlib, json
+          app = pathlib.Path(os.environ['APP'])
+          with (app / 'Info.plist').open('rb') as f:
+              info = plistlib.load(f)
+          assert info['CFBundleShortVersionString'] == '0.1.1'
+          assert info['DTPlatformName'] == 'iphoneos'
+          assert info['CFBundleSupportedPlatforms'] == ['iPhoneOS']
+          assert not list(app.rglob('*.appex')), 'Free build must not contain extensions'
+          assert not info.get('ScheduleAppGroup'), 'Free build must not depend on App Groups'
+          report = dict(version=info['CFBundleShortVersionString'], bundle_id=info['CFBundleIdentifier'], platform=info['DTPlatformName'], minimum_ios=info['MinimumOSVersion'], signed=False, widgets=False)
+          pathlib.Path('device-build.json').write_text(json.dumps(report, indent=2))
+          print(json.dumps(report))
+          PY
+          mkdir -p package/Payload
+          ditto "$APP" package/Payload/NufeScheduleFree.app
+          cd package
+          ditto -c -k --keepParent Payload ../NufeSchedule-iPhone-0.1.1-unsigned.ipa
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nufe-iphone-personal-ipa
+          path: |
+            NufeSchedule-iPhone-0.1.1-unsigned.ipa
+            device-build.json
+            device-platform.txt
+          if-no-files-found: error

@@ -1,0 +1,35 @@
+name: iOS native build
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  simulator:
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate Xcode project
+        run: |
+          brew install xcodegen
+          cd ios
+          xcodegen generate
+      - name: Build native app and widgets
+        run: |
+          cd ios
+          xcodebuild -project NufeSchedule.xcodeproj -scheme NufeSchedule -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nufe-ios-simulator
+          path: ios/build/Build/Products/Debug-iphonesimulator/
+          if-no-files-found: error
+      - name: Package generated Xcode project
+        run: |
+          mkdir ios-project
+          rsync -a --exclude build --exclude .github ios/ ios-project/
+          ditto -c -k --keepParent ios-project nufe-ios-xcode-source.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nufe-ios-xcode-source
+          path: nufe-ios-xcode-source.zip
+          if-no-files-found: error
