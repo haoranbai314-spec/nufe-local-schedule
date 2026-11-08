@@ -1,0 +1,57 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="cn.local.nufeschedule" android:versionCode="58" android:versionName="0.50.3">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
+  <uses-permission android:name="android.permission.INTERNET"/><uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+  <uses-permission android:name="android.permission.READ_CALENDAR"/><uses-permission android:name="android.permission.WRITE_CALENDAR"/><uses-permission android:name="android.permission.POST_NOTIFICATIONS"/><uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/><uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/><application android:theme="@style/LocalTheme" android:label="南财课表" android:icon="@drawable/app_icon" android:allowBackup="false" android:usesCleartextTraffic="false" android:supportsRtl="true">
+    <activity android:name=".MainActivity" android:exported="true">
+      <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+    </activity>
+    <provider android:name=".UpdateProvider" android:authorities="cn.local.nufeschedule.updates" android:exported="false" android:grantUriPermissions="true"/><activity android:name=".SchoolActivity" android:exported="false"/>
+    <service android:name=".CourseListService" android:permission="android.permission.BIND_REMOTEVIEWS" android:exported="false"/>
+    <receiver android:name=".ScheduleWidget" android:label="南财课表·七天" android:exported="false">
+      <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE"/><action android:name="android.intent.action.BOOT_COMPLETED"/><action android:name="android.intent.action.MY_PACKAGE_REPLACED"/><action android:name="android.intent.action.DATE_CHANGED"/><action android:name="android.intent.action.TIME_SET"/><action android:name="android.intent.action.TIMEZONE_CHANGED"/></intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/schedule_widget"/>
+    </receiver>
+    <receiver android:name=".FiveDayWidget" android:label="南财课表·五天" android:exported="false">
+      <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE"/><action android:name="android.intent.action.BOOT_COMPLETED"/><action android:name="android.intent.action.MY_PACKAGE_REPLACED"/><action android:name="android.intent.action.DATE_CHANGED"/><action android:name="android.intent.action.TIME_SET"/><action android:name="android.intent.action.TIMEZONE_CHANGED"/></intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/schedule_widget_five"/>
+    </receiver>  <receiver android:name=".NextLesson" android:exported="false"><intent-filter><action android:name="android.intent.action.BOOT_COMPLETED"/><action android:name="android.intent.action.MY_PACKAGE_REPLACED"/><action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED"/><action android:name="android.intent.action.DATE_CHANGED"/><action android:name="android.intent.action.TIME_SET"/><action android:name="android.intent.action.TIMEZONE_CHANGED"/></intent-filter></receiver></application>
+</manifest>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
